@@ -1,0 +1,54 @@
+POST http://localhost:3000/addusers
+Content-Type: application/json
+
+{
+    "username" : "admin",
+    "password" : "admin123",
+    "role" : "admin",
+    "status" : "aktif"
+}
+
+###
+GET http://localhost:5000/users/2
+
+###
+GET  http://localhost:3000/getallusers
+
+###
+GET  http://localhost:3000/activity-users
+###
+GET  http://localhost:3000/activity-users/detail/pegawai1
+###
+GET  http://localhost:3000/activity
+
+###
+PATCH  http://localhost:5000/users/1
+Content-Type: application/json
+
+{
+    "status" : "tidak aktif"
+}
+
+###
+POST http://localhost:3000/activity
+Content-Type: application/json
+
+{
+  "egg_inside" : "fertile",
+  "egg_width":  5,
+  "egg_length" : 6,
+  "grade" : "C",
+  "user_id" : 3
+}
+
+###
+GET http://localhost:3000/token
+
+###
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "username" : "admin",
+  "password" : "admin"
+}

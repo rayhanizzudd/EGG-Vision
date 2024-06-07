@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model users{
+  id_user Int @id @default(autoincrement())
+  username String @db.VarChar(255) @unique
+  password String @db.VarChar(255)
+  role role_users
+  status String @db.Text()
+  refresh_token String? @db.Text()
+  activity activity[]
+  calibration calibration?
+}
+
+model activity {
+  id_activity Int @id @default(autoincrement())
+  date_log DateTime @default(now())
+  egg_inside egg_inside
+  egg_width Float
+  egg_length Float
+  grade String @db.VarChar(5)
+  user_id Int
+  users users @relation(fields: [user_id], references: [id_user])
+}
+
+model calibration {
+  id_calibration Int @id @default(autoincrement())
+  length Float
+  width Float
+  scale_width Float
+  scale_length Float
+  id_user Int @unique
+  users users @relation(fields: [id_user], references: [id_user])
+}
+
+enum egg_inside{
+  fertile
+  nonfertile
+}
+
+enum role_users{
+  admin
+  pegawai
+}
+
+
